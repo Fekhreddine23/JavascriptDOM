@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+        li {
+            margin-bottom: 10px;
+        }
+
+        li button {
+            font-size: 8px;
+            margin-left: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+        <label for="item">Enter a new item:</label>
+        <input type="text" name="item" id="item">
+        <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+
+
+        //Créez trois variables, contenant des références aux éléments de liste <ul>,
+        // de champ <input> et de bouton <button>.
+        let list = document.querySelector('ul');
+        let input = document.querySelector('input');
+        let button = document.querySelector('button');
+
+        //Créez une fonction qui sera déclenchée lorsqu'on clique sur le bouton.
+        button.addEventListener('click', (e) => {
+           
+            e.preventDefault();
+             //À l'intérieur du corps de la fonction, commencez par stocker la valeur actuelle (propriété value) du champ dans une variable.
+            const myItem = input.value;
+
+            //Ensuite, videz le champ en définissant sa valeur comme une chaîne vide — ''.
+            input.value = '';
+
+            //Créez trois nouveaux éléments : un élément de liste <li>, un <span> et un bouton <button>,
+            // et stockez-les chacun dans des variables
+            const listItem = document.createElement('li');
+            const listText = document.createElement('span');
+            const listBtn = document.createElement('button');
+
+            //Attachez le <span> et le <button> comme enfants de <li>.
+            //Définissez le contenu texte du <span> comme égal 
+            //à la valeur du champ que vous avez récupéré précédemment, et le contenu du bouton à « Supprimer ».
+                
+            listItem.appendChild(listText);
+            listText.textContent = myItem
+            listItem.appendChild(listBtn);
+            listBtn.textContent = 'Delete';
+
+           
+
+
+            //Attachez l'article <li> comme enfant de la liste.
+            list.appendChild(listItem);
+
+
+            //Ajoutez un gestionnaire d'événement au bouton « Supprimer », 
+            //de façon à ce que lorsqu'on le clique le <li> dans lequel il se situe soit supprimé.
+            listBtn.addEventListener('click', () => {
+                list.removeChild(listItem);
+            });
+            
+            //Enfin, utilisez la méthode HTMLElement.focus pour donner le focus au champ, 
+            //qu'il soit prêt à recevoir la valeur du prochain article de la liste de courses.
+            input.focus();
+
+        })
+
+    </script>
+</body>
+
+</html>
